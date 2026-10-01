@@ -1,0 +1,41 @@
+seed: 42
+device: auto
+output_dir: outputs/mvtec
+
+data:
+  root: data/mvtec_anomaly_detection
+  category: bottle
+  shots: 4
+  image_size: 224
+  num_workers: 4
+
+model:
+  backbone: ViT-B-16-quickgelu
+  pretrained: openai
+  prompt_mode: dual
+  prompt_layers: [0, 5, 11]
+  prompt_length: 4
+  text_prompt_layers: [0, 5, 11]
+  text_prompt_length: 4
+  conditioner: linear
+
+training:
+  epochs: 50
+  batch_size: 4
+  learning_rate: 0.0035
+  momentum: 0.9
+  weight_decay: 0.0
+  regularization: 0.0001
+
+memory:
+  max_size: 1024
+  sampling: random
+  neighbors: 1
+  chunk_size: 2048
+
+inference:
+  layer_weights: [0.333333, 0.333334, 0.333333]
+  semantic_weight: 0.5
+  top_pixels: 100
+  threshold: 0.5
+
